@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Coding assignment # 6 </title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+   <script>
+    let runAgainOption = "y";
+    while (runAgainOption === "y") {
+        let numbers = [];
+        let previousNumber = prompt("Welcome to the calculator. Enter a number:");
+        numbers.push(parseInt(previousNumber));
+
+        let addMoreNumberOption = prompt("You entered " + previousNumber + ". Enter another number (y/n)?");
+        if (addMoreNumberOption !== undefined && addMoreNumberOption !== "") {
+            addMoreNumberOption = addMoreNumberOption.trim().toLowerCase();
+        }
+        while (addMoreNumberOption == "y") {
+            let number = prompt("Enter a number: ");
+            numbers.push(parseInt(number));
+            
+            addMoreNumberOption = prompt("You entered " + numbers.length + " numbers. Are there more (y/n)?");
+            if (addMoreNumberOption !== undefined && addMoreNumberOption !== "") {
+                addMoreNumberOption = addMoreNumberOption.trim().toLowerCase();
+            }
+            if (addMoreNumberOption == "y") {
+                continue;
+            } else {
+                break;
+            }
+        } 
+        let operatorOption = prompt("You entered " + numbers.length + " numbers. What operation would you like to perform? (+, -, *, /)");
+        if (operatorOption === "/" && numbers.length < 2) {
+            alert("Can not perform / because there is not enough 2 numbers in array");
+            continue;
+        } 
+
+        let result = 0;
+        if (numbers.length == 1) {
+            result = numbers[0];
+            runAgainOption = prompt("You entered " + numbers.length + " numbers. Your answer is " + result + ". Would you like to perform another calculation (y/n)?")
+            if (runAgainOption !== undefined && runAgainOption !== "") {
+                runAgainOption = runAgainOption.trim().toLowerCase();
+            }
+            if (runAgainOption === "n") {
+                break;
+            } else {
+                continue;
+            }
+        }
+        if (operatorOption === "+") {
+            for (let i = 0; i < numbers.length; i++) {
+                result = result + numbers[i]; 
+            }
+        } else if (operatorOption === "-") {
+            for (let i = 0; i < numbers.length; i++) {
+                result = result - numbers[i]; 
+            }
+        } else if (operatorOption === "*") {
+            result = 1;
+            for (let i = 0; i < numbers.length; i++) {
+                result = result * numbers[i]; 
+            }
+        } else if (operatorOption === "/") {
+            result = numbers[0];
+            for (let i = 1; i < numbers.length; i++) {
+                if (numbers[i] == 0) {
+                    alert("Can not divide by 0");
+                    break;
+                }
+                result = result / numbers[i]; 
+            }
+        }
+        runAgainOption = prompt("You entered " + numbers.length + " numbers. Your answer is " + result + ". Would you like to perform another calculation (y/n)?")
+        if (runAgainOption !== undefined && runAgainOption !== "") {
+            runAgainOption = runAgainOption.trim().toLowerCase();
+        }
+        if (runAgainOption === "n") {
+            break;
+        }
+    }
+
+    if (runAgainOption === "n") {
+        alert("Goodbye!");
+    }
+   </script>
+</body>
+
+</html>
